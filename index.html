@@ -341,17 +341,6 @@ img{border:1px solid var(--line) !important;border-radius:6px}
       </div>
     </div>
 
-    <!-- 第三希望日時 -->
-    <div class="labelkibounitizi">第三希望日時<span class="required">必須</span></div>
-    <div class="datetime-wrapper" style="text-align: center;">
-      <span class="placeholder" id="placeholder3">⇩タップして日時を入力⇩</span>
-      <input type="hidden" id="date3" name="date3">
-      <div class="dt-grid">
-        <select id="date3_day" class="datetime-input" aria-label="日付を選択"></select>
-        <select id="date3_time" class="datetime-input" aria-label="時間（00/30のみ）"></select>
-      </div>
-    </div>
-
     <!-- 備考 -->
     <div class="labelmessezi">備考（任意）</div>
     <textarea id="message" rows="4" placeholder="ご要望などがあればご記入ください"></textarea>
@@ -386,7 +375,7 @@ img{border:1px solid var(--line) !important;border-radius:6px}
       restoreInputs();
 
       // 日時ピッカー初期化
-      ['date1','date2','date3'].forEach(id => initPicker(id, 120));
+      ['date1','date2'].forEach(id => initPicker(id, 120));
 
       // 表示更新
       updateDisplayInfo();
@@ -609,11 +598,9 @@ img{border:1px solid var(--line) !important;border-radius:6px}
 
       const d1 = document.getElementById('date1').value;
       const d2 = document.getElementById('date2').value;
-      const d3 = document.getElementById('date3').value;
 
       const d1Text = d1 ? `・<span style="color:#45c4b7;"><strong>第1希望日</strong></span><br>${formatDateTime(d1)}` : '・第1希望日が未選択です';
       const d2Text = d2 ? `・<span style="color:#45c4b7;"><strong>第2希望日</strong></span><br>${formatDateTime(d2)}` : '・第2希望日が未選択です';
-      const d3Text = d3 ? `・<span style="color:#45c4b7;"><strong>第3希望日</strong></span><br>${formatDateTime(d3)}` : '・第3希望日が未選択です';
 
       document.getElementById('displayInfo').innerHTML = `
         <div class="info-row">
@@ -653,10 +640,6 @@ img{border:1px solid var(--line) !important;border-radius:6px}
           <button class="edit-button" onclick="scrollToId('date2_day')">修正</button>
         </div><hr>
         <div class="info-row">
-          <p>${d3Text}</p>
-          <button class="edit-button" onclick="scrollToId('date3_day')">修正</button>
-        </div><hr>
-        <div class="info-row">
           <p><span style="color:#45c4b7;"><strong>【備考】</strong></span><br>${msg?msg:'（未入力）'}</p>
           <button class="edit-button" onclick="scrollToId('message')">修正</button>
         </div>
@@ -686,7 +669,6 @@ img{border:1px solid var(--line) !important;border-radius:6px}
 
       const d1 = document.getElementById('date1').value;
       const d2 = document.getElementById('date2').value;
-      const d3 = document.getElementById('date3').value;
 
       // バリデーション
       if(!name){ alert('お名前は必須です'); return; }
@@ -718,9 +700,6 @@ ${formatDate(d1)}
 
 《第二希望日》
 ${d2?formatDate(d2):'（未入力）'}
-
-《第三希望日》
-${d3?formatDate(d3):'（未入力）'}
 
 《備考》
 ${msg || '（なし）'}`;
